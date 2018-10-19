@@ -1,0 +1,38 @@
+
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.dropdown-toggle:after {
+	display: none;
+}
+
+.v-select .dropdown-toggle .clear {
+	display: none;
+}
+
+.ingredient-selector {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5em;
+}
+
+.ingredient-dropdown {
+	flex: 1;
+}
+
+.ingredient-remove {
+	margin-left: 1em;
+	color: red;
+	cursor: pointer;
+}
