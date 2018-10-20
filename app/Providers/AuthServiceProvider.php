@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Ingredient;
+use App\Mealplan;
+use App\Policies\OwnershipPolicy;
+use App\Recipe;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +16,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Recipe::class => OwnershipPolicy::class,
+        Ingredient::class => OwnershipPolicy::class,
+        Mealplan::class => OwnershipPolicy::class,
     ];
 
     /**
@@ -24,7 +29,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

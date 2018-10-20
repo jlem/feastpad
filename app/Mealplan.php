@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Interfaces\Ownable;
+use App\Traits\BelongsToUser;
 use Illuminate\Database\Eloquent\Model;
 
-class Mealplan extends Model
+class Mealplan extends Model implements Ownable
 {
+    use BelongsToUser;
+
     public function recipes()
     {
         return $this->belongsToMany(Recipe::class);

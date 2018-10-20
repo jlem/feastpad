@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Ingredient;
+use Auth;
 use App\Presenters\DropdownPresenter;
 use App\Recipe;
 use Illuminate\Http\Request;
@@ -12,24 +12,26 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('recipe.index', [
-            'recipes' => Recipe::all(),
+            'recipes' => $request->user()->recipes
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $presenter = new DropdownPresenter();
-        $ingredients = Ingredient::all();
+        $ingredients = $request->user()->ingredients;
         $ingredientOptions = $presenter->convertToOptions($ingredients, 'name', 'id');
 
         return view('recipe.create', [
@@ -59,18 +61,19 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, Recipe $recipe)
     {
         $presenter = new DropdownPresenter();
-        $ingredients = Ingredient::all();
+        $ingredients = $request->user()->ingredients;
         $ingredientOptions = $presenter->convertToOptions($ingredients, 'name', 'id');
 
         return view('recipe.edit', [
             'ingredientOptions' => $ingredientOptions,
-            'recipe' => Recipe::find($id)
+            'recipe' => $recipe
         ]);
     }
 
@@ -88,14 +91,12 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Recipe $recipe)
     {
-        $recipe = Recipe::find($id);
-
         $recipe->name = $request->get('name');
         $recipe->instructions = $request->get('instructions');
         $recipe->ingredients()->sync($request->get('ingredients'));

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Mealplan;
-use App\Recipe;
 use Illuminate\Http\Request;
 
 class MealplanController extends Controller
@@ -11,24 +11,26 @@ class MealplanController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('mealplan.index', [
-            'mealplans' => Mealplan::with('recipes')->get()
+            'mealplans' => $request->user()->mealplans()->with('recipes')->get()
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('mealplan.create', [
-            'allRecipes' => Recipe::all(),
+            'allRecipes' => $request->user()->recipes
         ]);
     }
 
@@ -65,13 +67,14 @@ class MealplanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         return view('mealplan.edit', [
-            'allRecipes' => Recipe::all(),
+            'allRecipes' => $request->user()->recipes,
             'mealplan' => Mealplan::find($id)
         ]);
     }

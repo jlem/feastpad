@@ -19,8 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('stores', 'StoreController');
-Route::resource('aisles', 'AisleController');
-Route::resource('recipes', 'RecipeController');
-Route::resource('ingredients', 'IngredientController');
-Route::resource('mealplans', 'MealPlanController');
+//route::get('/recipes/{recipeee}', function (\App\Recipe $recipeee) {
+//   return 'hey';
+//})->middleware('can:view,recipeee');
+
+Route::resource('stores', 'StoreController')->middleware('auth');
+Route::resource('aisles', 'AisleController')->middleware('auth');
+Route::resource('recipes', 'RecipeController')->middleware(['auth', 'ownership']);
+Route::resource('ingredients', 'IngredientController')->middleware(['auth', 'ownership']);
+Route::resource('mealplans', 'MealPlanController')->middleware('auth');

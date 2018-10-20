@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Ingredient;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,13 @@ class IngredientController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('ingredient.index', [
-            'ingredients' => Ingredient::all()
+            'ingredients' =>  $request->user()->ingredients
         ]);
     }
 
