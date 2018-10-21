@@ -7,6 +7,7 @@
 @import '_variables';
 @import '_typography';
 @import '_buttons';
+@import '_header';
 @import '_pills';
 @import '_forms';
 
@@ -33,6 +34,10 @@ body {
 .simple-page {
 	.body {
 		margin-bottom: 0.5rem;
+
+		h1 {
+			margin-bottom: 3rem;
+		}
 	}
 }
 

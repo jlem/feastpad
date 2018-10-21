@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    @if(Auth::check())
-        @include('page-partials.dashboard')
-    @endif
-    @if(!Auth::check())
+    @guest
         @include('page-partials.register')
-    @endif
+    @else
+        @include('page-partials.dashboard')
+    @endguest
 @endsection

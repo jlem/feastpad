@@ -17,7 +17,7 @@
             <div class="form__login-button">
                 <button type="submit" class="button button--primary d-sm-block w-100">{{ __('Send Password Reset Link') }}</button>
             </div>
-            <h3>
+            <h3 style="margin-top: 1.5em;">
                 <a href="/login">Cancel</a>
             </h3>
         </form>

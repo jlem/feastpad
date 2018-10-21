@@ -1,0 +1,58 @@
+@import "_variables";
+
+.site__header {
+	margin-bottom: 2rem;
+	padding-top: 1em;
+	background: #fff;
+	border-bottom: 5px solid $primary;
+}
+
+.site__logo {
+	font-weight: bold;
+	font-size: 1.5em;
+	color: $gray-dark;
+}
+
+.site__identity-bar {
+	margin-bottom: 1em;
+}
+
+@media (max-width: 320px) {
+	.nav__item {
+		font-size: 0.8em;
+	}
+}
+
+.site__nav {
+
+	.nav__item {
+		margin-right: 0.25em;
+		border: 1px solid $gray-faint;
+		border-bottom: none;
+		border-radius: 5px 5px 0 0;
+		flex: 1 1 auto;
+		text-align: center;
+		background: #fff;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+		color: $gray-medium;
+
+		&-active {
+			border: none;
+			background: $primary;
+			color: #fff;
+
+			&:hover {
+				color: #fff !important;
+			}
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+
+		&:hover {
+			color: $gray-dark;
+		}
+	}
+}
