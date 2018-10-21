@@ -5,6 +5,12 @@ body {
 	font-family: 'Quicksand';
 }
 
+@media (max-width: 320px) {
+	body {
+		font-size: 10px;
+	}
+}
+
 h1 {
 	margin-bottom: 1em;
 	font-size: 2em;
