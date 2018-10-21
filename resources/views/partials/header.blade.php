@@ -5,7 +5,7 @@
                 {{ config('app.name') }}
             </a>
             <div class="site__user">
-                {{ Auth::user()->name }}
+                <a href="/profile"><i class="fas fa-user"></i> {{ Auth::user()->name }}</a>
             </div>
         </div>
         <nav class="site__nav d-flex">

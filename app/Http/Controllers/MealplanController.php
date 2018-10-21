@@ -6,7 +6,7 @@ use Auth;
 use App\Mealplan;
 use Illuminate\Http\Request;
 
-class MealplanController extends Controller
+class MealPlanController extends Controller
 {
     /**
      * Display a listing of the resource.
