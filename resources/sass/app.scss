@@ -85,3 +85,20 @@ body {
 	color: red;
 	cursor: pointer;
 }
+
+@media (max-width: 320px) {
+	.simple-page {
+		.body {
+			h1 {
+				font-size: 2em;
+				margin-bottom: 1rem;
+			}
+		}
+
+		.logo {
+			margin-top: 0.75rem;
+			margin-bottom: 1.5rem;
+		}
+	}
+}
+

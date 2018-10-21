@@ -1,11 +1,5 @@
 @import "_variables";
 
-@media (max-width: 320px) {
-	html {
-		font-size: 10px;
-	}
-}
-
 body {
 	color: $gray-dark;
 	font-family: 'Quicksand';
