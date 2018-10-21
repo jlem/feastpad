@@ -41,6 +41,29 @@ body {
 	}
 }
 
+.resource-page {
+	.resource-page__header {
+		margin-bottom: 2em;
+		text-align: center;
+	}
+
+	.resource-page__list {
+		border-radius: $border-radius;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		background: #fff;
+	}
+
+	.resource-page__list-empty {
+		background: transparent;
+		color: $gray-medium;
+		border: 1px solid $gray-faint;
+		padding: 2em;
+		margin-top: 0;
+		text-align: center;
+	}
+}
+
 .logo {
 	margin-top: 1rem;
 	margin-bottom: 3rem;

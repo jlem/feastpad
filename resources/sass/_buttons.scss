@@ -28,5 +28,8 @@ a.button {
 .button--ghost {
 	color: $gray-medium !important;
 	background: rgba(0, 0, 0, 0.05);
-	border: 2px solid $gray-faint;
+}
+
+.button--small {
+	padding: 0.5em 1em;
 }

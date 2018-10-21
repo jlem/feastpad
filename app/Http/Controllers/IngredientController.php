@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Auth;
 use App\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class IngredientController extends Controller
 {
@@ -16,8 +18,14 @@ class IngredientController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var User $user */
+        $user = $request->user();
+
+        /** @var Collection $ingredients */
+        $ingredients = $user->ingredients;
+
         return view('ingredient.index', [
-            'ingredients' =>  $request->user()->ingredients
+            'ingredients' =>  $ingredients->sortBy('name')->values()
         ]);
     }
 
@@ -50,21 +58,23 @@ class IngredientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Ingredient $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Ingredient $ingredient)
     {
-        return view('ingredient.edit');
+        return view('ingredient.edit', [
+            'ingredient' => $ingredient
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Ingredient $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {
         // not used
     }
@@ -72,23 +82,28 @@ class IngredientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Ingredient $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ingredient $ingredient)
     {
-        //
+        $ingredient->name = $request->get('name');
+        $ingredient->save();
+
+        return redirect('/ingredients');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Ingredient $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+
+        return redirect('/ingredients');
     }
 }

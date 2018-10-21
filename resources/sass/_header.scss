@@ -29,7 +29,6 @@
 }
 
 .site__nav {
-
 	.nav__item {
 		margin-right: 0.25em;
 		border: 1px solid $gray-faint;
@@ -59,5 +58,11 @@
 		&:hover {
 			color: $gray-dark;
 		}
+	}
+}
+
+@media (max-width: 320px) {
+	.nav__item {
+		font-size: 0.75em;
 	}
 }

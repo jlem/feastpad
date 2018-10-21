@@ -61,11 +61,24 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Recipe $recipe
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Recipe $recipe)
+    {
+        return view('recipe.show', [
+            'recipe' => $recipe
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
      * @param Request $request
      * @param Recipe $recipe
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Recipe $recipe)
+    public function edit(Request $request, Recipe $recipe)
     {
         $presenter = new DropdownPresenter();
         $ingredients = $request->user()->ingredients;
@@ -75,17 +88,6 @@ class RecipeController extends Controller
             'ingredientOptions' => $ingredientOptions,
             'recipe' => $recipe
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        dd(Recipe::find($id)->ingredients);
     }
 
     /**
@@ -109,11 +111,14 @@ class RecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Recipe $recipe
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+
+        return redirect('/recipes');
     }
 }

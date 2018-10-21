@@ -17,6 +17,11 @@
                                 'recipeIngredients' => $recipe->ingredients
                             ])
                         </form>
+                        <form method="POST" action="{{ route('recipes.destroy', ['id' => $recipe->id]) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button class="button button--ghost w-100 mt-5" type="submit"><i class="far fa-trash-alt"></i> Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>

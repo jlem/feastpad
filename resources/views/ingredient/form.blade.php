@@ -1,21 +1,12 @@
-<div class="form-group row">
-    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-    <div class="col-md-6">
-        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', $name) }}" required autofocus>
-
-        @if ($errors->has('name'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('name') }}</strong>
-            </span>
-        @endif
+<div class="form__field-group">
+    <div class="form__field">
+        <div class="form__field-header">
+            <label class="form__field-label">Name</label> @if ($errors->has('name'))<span class="form__field-error">{{ $errors->first('name') }}</span> @endif
+        </div>
+        <input class="form__field-input" placeholder="Name" type="text" name="name" value="{{ $name ?? old('name') }}" required autofocus>
     </div>
 </div>
-
-<div class="form-group row mb-0">
-    <div class="col-md-6 offset-md-4">
-        <button type="submit" class="btn btn-primary">
-            {{ __('Save') }}
-        </button>
-    </div>
+<div class="form__login-button">
+    <button type="submit" class="button button--primary d-sm-block w-100">{{ __('Save') }}</button>
 </div>
+
