@@ -13,7 +13,7 @@
     <h2 class="mt-5">Instructions</h2>
     <div class="card">
         <div class="card-body">
-            {{ $recipe->instructions }}
+            {!!  nl2br(e($recipe->instructions)) !!}
         </div>
     </div>
     <a class="button button--primary d-block w-100 mt-5" href="{{ route('recipes.edit', ['id' => $recipe->id]) }}">
