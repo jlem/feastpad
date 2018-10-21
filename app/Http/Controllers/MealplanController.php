@@ -54,13 +54,13 @@ class MealplanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Mealplan $mealplan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Mealplan $mealplan)
     {
         return view('mealplan.show', [
-            'mealplan' => Mealplan::find($id)
+            'mealplan' => $mealplan
         ]);
     }
 

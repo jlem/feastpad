@@ -1,0 +1,42 @@
+@import "_variables";
+
+body {
+	color: $gray-dark;
+	font-family: 'Quicksand';
+}
+
+h1 {
+	font-size: 2em;
+	margin: 1.5em 0;
+}
+
+h2 {
+	color: $gray-medium;
+	font-size: 1.5em;
+	margin: 1em 0 0.5em 0;
+}
+
+h3 {
+	font-size: 1.25em;
+	margin: 1em 0 0.5em 0;
+
+	a {
+		color: $gray-medium;
+	}
+}
+
+.underline {
+	border-bottom: 1px solid $primary;
+}
+
+a {
+	color: $primary;
+	text-decoration: none;
+	font-weight: bold;
+
+	&:hover {
+		font-weight: bold;
+		text-decoration: none;
+		color: $gray-dark;
+	}
+}

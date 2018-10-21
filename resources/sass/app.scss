@@ -1,12 +1,45 @@
-
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300');
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Variables
+@import '_variables';
+@import '_typography';
+@import '_buttons';
+@import '_pills';
+@import '_forms';
+
+html {
+	height: 100%;
+}
+
+body {
+	background: $background;
+	height: 100%;
+}
+
+@media (min-width: 768px) {
+	.w-md-200 { width: 200px; }
+	.w-md-250 { width: 250px; }
+	.w-md-300 { width: 300px; }
+	.w-md-350 { width: 350px; }
+	.w-md-400 { width: 400px; }
+	.w-md-450 { width: 450px; }
+	.w-md-500 { width: 500px; }
+	.w-md-600 { width: 600px; }
+}
+
+.simple-page {
+	.header {
+		text-align: center;
+	}
+
+	.header,
+	.footer {
+		min-height: 100px;
+	}
+}
 
 .navbar-laravel {
   background-color: #fff;

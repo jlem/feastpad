@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    @if(Auth::check())
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -36,9 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="/recipes">Recipes</a></li>
                         <li class="nav-item"><a class="nav-link"href="/ingredients">Ingredients</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/stores">Stores</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/aisles">Aisles</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/mealplans">Mealplans</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/mealplans">Meal Plans</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,11 +74,8 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    @endif
+    @yield('content')
     @stack('scripts')
 </body>
 </html>

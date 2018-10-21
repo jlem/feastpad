@@ -1,0 +1,24 @@
+@import '_variables';
+
+.pill {
+	font-size: 0.5em;
+	vertical-align: middle;
+	padding: 0.5em;
+	font-weight: bold;
+	display: inline-block;
+	border-radius: 2px;
+}
+
+.pill--primary {
+	background: $primary;
+	color: #fff;
+}
+
+.pill--ghost {
+	background: $gray-faint;
+}
+
+.pill--dark {
+	background: $gray-dark;
+	color: #fff;
+}
