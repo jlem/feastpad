@@ -1,14 +1,14 @@
 @import "_variables";
 
+@media (max-width: 320px) {
+	html {
+		font-size: 10px;
+	}
+}
+
 body {
 	color: $gray-dark;
 	font-family: 'Quicksand';
-}
-
-@media (max-width: 320px) {
-	body {
-		font-size: 10px;
-	}
 }
 
 h1 {
