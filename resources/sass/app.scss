@@ -31,13 +31,24 @@ body {
 }
 
 .simple-page {
-	.header {
-		text-align: center;
+	.body {
+		margin-bottom: 0.5rem;
+	}
+}
+
+.logo {
+	margin-top: 1rem;
+	margin-bottom: 3rem;
+
+	h1 {
+		font-size: 3em;
+		font-weight: bold;
+		margin: 0;
 	}
 
-	.header,
-	.footer {
-		min-height: 100px;
+	h3 {
+		margin: 0;
+		margin-top: 0.5em;
 	}
 }
 
