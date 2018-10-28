@@ -1,0 +1,64 @@
+@import '../variables';
+
+.recipe-form {
+
+    /* clean up bad vue-select CSS */
+    .v-select {
+        input.form-control {
+            margin: 0;
+            height: auto;
+            padding: 0;
+        }
+
+        .selected-tag {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown-toggle .clear,
+        .dropdown-toggle:after {
+            display: none;
+        }
+
+        .dropdown-toggle {
+            padding: 0.75em;
+            background: #fff;
+            border: none;
+        }
+    }
+
+    .ingredient-list {
+        margin-top: 2em;
+
+        h2 {
+            margin-bottom: 1em;
+        }
+    }
+
+    .ingredient-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5em;
+    }
+
+    .ingredient-field-group {
+        margin-right: 2em;
+        flex: 1;
+        border-radius: $border-radius;
+    }
+
+    .ingredient-item__control {
+        width: 100%;
+    }
+
+    .ingredient-item__control-input {
+        border: none;
+        padding: 0.75em;
+        border-radius: $border-radius;
+    }
+
+    .ingredient-item__remove {
+        color: red;
+        cursor: pointer;
+    }
+}

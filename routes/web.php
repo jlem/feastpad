@@ -10,3 +10,5 @@ Route::resource('aisles', 'AisleController')->middleware('auth');
 Route::resource('recipes', 'RecipeController')->middleware(['auth', 'ownership']);
 Route::resource('ingredients', 'IngredientController')->middleware(['auth', 'ownership']);
 Route::resource('mealplans', 'MealPlanController')->middleware(['auth', 'ownership']);
+
+Route::post('test', 'RecipeController@test');

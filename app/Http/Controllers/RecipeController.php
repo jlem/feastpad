@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UnitOfMeasure;
 use Auth;
 use App\Presenters\DropdownPresenter;
 use App\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RecipeController extends Controller
 {
+
+    public function test(Request $request) {
+        return response()->json($request->toArray());
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,12 +37,11 @@ class RecipeController extends Controller
      */
     public function create(Request $request)
     {
-        $presenter = new DropdownPresenter();
         $ingredients = $request->user()->ingredients;
-        $ingredientOptions = $presenter->convertToOptions($ingredients, 'name', 'id');
 
         return view('recipe.create', [
-            'ingredientOptions' => $ingredientOptions
+            'ingredientOptions' => $ingredients,
+            'unitOfMeasureOptions' => UnitOfMeasure::toArray()
         ]);
     }
 
@@ -47,15 +53,32 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        $recipe = new Recipe();
-        $recipe->user_id = $request->user()->id;
-        $recipe->name = $request->get('name');
-        $recipe->instructions = $request->get('instructions');
-        $recipe->save();
+        try {
+            DB::beginTransaction();
+            // Create the recipe
+            $recipe = new Recipe();
+            $recipe->user_id = $request->user()->id;
+            $recipe->name = $request->get('name');
+            $recipe->instructions = $request->get('instructions');
+            $recipe->save();
 
-        $recipe->ingredients()->sync($request->get('ingredients'));
+            // Create new RecipeIngredients
+            foreach($request->get('recipeIngredients') as $recipeIngredientData) {
+                $recipe->ingredients()->create([
+                    'recipe_id' => $recipe->id,
+                    'ingredient_id' => $recipeIngredientData['ingredient_id'],
+                    'quantity' => $recipeIngredientData['quantity'],
+                    'units' => $recipeIngredientData['units']
+                ]);
+            }
 
-        return redirect('/recipes');
+            DB::commit();
+            return response()->json('ok');
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json('Something went wrong with the server', 500);
+        }
     }
 
     /**
@@ -66,6 +89,8 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
+        $recipe->load('ingredients.ingredient');
+
         return view('recipe.show', [
             'recipe' => $recipe
         ]);
@@ -80,12 +105,11 @@ class RecipeController extends Controller
      */
     public function edit(Request $request, Recipe $recipe)
     {
-        $presenter = new DropdownPresenter();
         $ingredients = $request->user()->ingredients;
-        $ingredientOptions = $presenter->convertToOptions($ingredients, 'name', 'id');
 
         return view('recipe.edit', [
-            'ingredientOptions' => $ingredientOptions,
+            'ingredientOptions' => $ingredients,
+            'unitOfMeasureOptions' => UnitOfMeasure::toArray(),
             'recipe' => $recipe
         ]);
     }
@@ -99,13 +123,29 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        $recipe->name = $request->get('name');
-        $recipe->instructions = $request->get('instructions');
-        $recipe->ingredients()->sync($request->get('ingredients'));
+        try {
+            DB::beginTransaction();
+            $recipe->name = $request->get('name');
+            $recipe->instructions = $request->get('instructions');
+            $recipe->ingredients()->delete(); // Easier to blow away all existing RecipeIngredients and then just re-create them
+            $recipe->save();
 
-        $recipe->save();
+            foreach ($request->get('recipeIngredients') as $recipeIngredientData) {
+                $recipe->ingredients()->create([
+                    'recipe_id' => $recipe->id,
+                    'ingredient_id' => $recipeIngredientData['ingredient_id'],
+                    'quantity' => $recipeIngredientData['quantity'],
+                    'units' => $recipeIngredientData['units']
+                ]);
+            }
 
-        return redirect('/recipes');
+            DB::commit();
+            return response()->json('ok');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return response()->json('Something went wrong with the server', 500);
+        }
     }
 
     /**

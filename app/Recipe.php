@@ -12,7 +12,7 @@ class Recipe extends Model implements Ownable
 
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->hasMany(RecipeIngredient::class);
     }
 
     public function mealplans()

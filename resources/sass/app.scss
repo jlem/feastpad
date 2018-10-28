@@ -1,15 +1,19 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300');
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Variables
+// Common
 @import '_variables';
 @import '_typography';
 @import '_buttons';
 @import '_header';
 @import '_pills';
 @import '_forms';
+
+// Page partials
+@import 'partials/recipe-form';
 
 html {
 	height: 100%;
@@ -85,30 +89,6 @@ body {
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-
-.dropdown-toggle:after {
-	display: none;
-}
-
-.v-select .dropdown-toggle .clear {
-	display: none;
-}
-
-.ingredient-selector {
-	display: flex;
-	align-items: center;
-	margin-bottom: 0.5em;
-}
-
-.ingredient-dropdown {
-	flex: 1;
-}
-
-.ingredient-remove {
-	margin-left: 1em;
-	color: red;
-	cursor: pointer;
 }
 
 @media (max-width: 320px) {
