@@ -10,7 +10,7 @@
         </div>
         <div class="form__field">
             <textarea v-model="instructions"
-                      placeholder="Instructions"
+                      placeholder="Directions"
                       rows="10"
                       id="name"
                       class="form__field-input"
@@ -34,7 +34,7 @@
                 <div class="form__field">
                     <input v-model="recipeIngredient.quantity"
                            class="quantity-input ingredient-item__control ingredient-item__control-input"
-                           type="number"
+                           type="text"
                            placeholder="Quantity">
                 </div>
                 <div class="form__field">
